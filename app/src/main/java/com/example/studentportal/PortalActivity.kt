@@ -30,8 +30,17 @@ class PortalActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        addDummyPortal()
         rvPortal.layoutManager = GridLayoutManager(this, 2)
         rvPortal.adapter = portalAdapter
+    }
+
+    private fun addDummyPortal() {
+        portals.add(Portal(title = "HvA", portalUrl = "https://hva.nl"))
+        portals.add(Portal(title = "SIS", portalUrl = "https://sis.hva.nl"))
+        portals.add(Portal(title = "DLO", portalUrl = "https://dlo.mijnhva.nl/"))
+        portals.add(Portal(title = "Roosters", portalUrl = "https://roosters.hva.nl"))
+        portalAdapter.notifyDataSetChanged()
     }
 
     private fun startAddPortalActivity() {
@@ -69,7 +78,10 @@ class PortalActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.home -> {
+                finish()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
